@@ -37,6 +37,8 @@ module.exports = {
         password: hashedPassword,
       });
       user.save();
+      console.log(user);
+      
       res.send(user);
       // throw new ErrorHandler(501, "Registration failed!");
     });
