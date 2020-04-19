@@ -6,6 +6,13 @@ import Button from "react-bootstrap/Button";
 import RegisterForm from "../../components/Forms/AuthForms/RegisterForm";
 
 class Register extends Component {
+  state = {
+    firstName: '',
+    lastName: '',
+    userName: '',
+    email: '',
+    password: ''
+  }
   render() {
     return (
       <div>

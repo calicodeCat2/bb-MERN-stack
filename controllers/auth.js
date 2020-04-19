@@ -13,7 +13,6 @@ module.exports = {
   },
 
   getUser: (req, res, next) => {
-    console.log(req.params);
     const id = req.params.id;
     const user = User.findById({ _id: id })
       .then((result) => {
@@ -45,23 +44,22 @@ module.exports = {
   },
 
   login: (req, res) => {
+    console.log('login', req.body);
     const email = req.body.email;
     const password = req.body.password;
-    const user = User.findOne({ email: email }).then((result) => {
+    User.findOne({ email: email }).then((result) => {
       let user = result;
       bcrypt.compare(password, user.password, (err, hash) => {
         if (hash) {
           let { ...authUser } = user;
-          // console.log("authUser", authUser);
+          console.log("authUser", authUser);
 
           jwt.sign(authUser, wombat, (err, token) => {
             if (err) throw new ErrorHandler(401, "Token not created.");
-            res.json({
+            const reply = res.json({
               message: "Authenticated",
               id: authUser._doc._id,
-              firstName: authUser._doc.firstName,
-              lastName: authUser._doc.lastName,
-              username: authUser._doc.username,
+              user: authUser._doc,
               token
             });
           })

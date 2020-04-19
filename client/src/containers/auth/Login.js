@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import LoginForm from "../../components/Forms/AuthForms/LoginForm";
+import * as actions from "../../store/actions/authActions";
+
 
 class Login extends Component {
   state = {
@@ -12,21 +15,19 @@ class Login extends Component {
       email: event.email,
       password: event.password
     });
-    console.log(this.state);
-    
   };
 
   handleSubmit = event => {
-  //   event.preventDefault();
-  //   let userData = {
-  //     email: this.state.email,
-  //     password: this.state.password
-  //   };
-  //   this.props.onLogin(userData);
-  event.preventDefault();
-  
-  console.log(this.state);
-  
+    event.preventDefault();
+    let user = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    console.log('submit', user);
+    
+    this.props.onLogin(user);  
+    console.log('click')
+
   };
   render() {
 
@@ -36,13 +37,23 @@ class Login extends Component {
       <div>
         <LoginForm 
         onChange={this.handleChange}
-        value={this.state}
+        onSubmit={this.handleSubmit}
+        user={this.user}
         />
       </div>
     );
   }
 }
 
-// const mapStateToProps = (state, actions) => {};
+const mapStateToProps = (state) => {
+  console.log(state);
+  
+} 
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: user => dispatch(actions.loginUser(user))
+  }
+};
+
+export default connect(null, mapDispatchToProps)(Login);

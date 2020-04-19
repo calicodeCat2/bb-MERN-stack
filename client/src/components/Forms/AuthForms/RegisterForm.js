@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { reduxForm, Field } from "redux-form";
-import { Link } from "react-router-dom";
 import RegisterField from "./RegisterField";
 import registerFields from "./registerFields";
 

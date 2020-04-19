@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { reduxForm, Field, submit } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import LoginField from "./LoginField";
 import loginFields from "./loginFields";
-import * as actions from "../../../store/actions/authActions";
+import * as actions from '../../../store/actions/authActions';
+
 
 class LoginForm extends Component {
   renderFields() {
-    // console.log(this.props);
-    
     return _.map(loginFields, ({ label, name }) => {
       return (
         <Field
@@ -19,7 +18,7 @@ class LoginForm extends Component {
           type="text"
           label={label}
           name={name}
-          value={this.props.value.event}
+          onChange={this.props.onChange}
         />
       );
     });
@@ -27,11 +26,7 @@ class LoginForm extends Component {
   render() {
     return (
       <div>
-        <form
-          // Need to receive submit props
-        >
-
-          {console.log(this.renderFields())}
+        <form onSubmit={this.props.onSubmit}>
           {this.renderFields()}
           <Button type="submit">
             Submit
@@ -42,7 +37,13 @@ class LoginForm extends Component {
   }
 }
 
-LoginForm = connect(null, actions)(LoginForm);
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: user => dispatch(actions.loginUser(user))
+  }
+};
+
+LoginForm = connect(null, mapDispatchToProps)(LoginForm)
 
 export default reduxForm({
   form: "loginForm",
