@@ -1,25 +1,25 @@
 .toolbar {
-    &-row {
+  background-color: dodgerblue;
 
-    }
-    &-col--left {
-        margin-left: 10px;
-    }
-    &-col--left_image {
-        height: 75px;
-    }
-    &-col--right {
-        display: flex;
-        flex-direction: row;
-        
-    }
-    &-col--right__item {
-        margin: 5px;
-        display: flex;
-        align-self: right;
-    }
+  &-col--left {
+    margin-left: 10px;
+  }
 
+  &-col--left_image {
+    height: 75px;
+    margin: 5px 0 5px 0;
+  }
+
+  &-col--right {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &-col--right__item {
+    margin: 5px;
+    display: flex;
+    align-self: right;
+    color: black;
+    text-decoration: none;
+  }
 }
-
-
-

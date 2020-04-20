@@ -24,7 +24,7 @@ module.exports = {
       });
   },
 
-  register: async (req, res, next) => {
+  register: (req, res, next) => {
     const { firstName, lastName, username, email } = req.body;
     const password = req.body.password;
     bcrypt.hash(password, 12).then((hashedPassword) => {
@@ -38,7 +38,7 @@ module.exports = {
       user.save();
       console.log(user);
       
-      res.send(user);
+      res.status(200).json({ message: "Registration success!", user: user});
       // throw new ErrorHandler(501, "Registration failed!");
     });
   },
@@ -56,7 +56,7 @@ module.exports = {
 
           jwt.sign(authUser, wombat, (err, token) => {
             if (err) throw new ErrorHandler(401, "Token not created.");
-            const reply = res.json({
+            res.status(200).json({
               message: "Authenticated",
               id: authUser._doc._id,
               user: authUser._doc,
