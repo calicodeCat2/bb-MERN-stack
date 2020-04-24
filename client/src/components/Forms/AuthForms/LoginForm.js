@@ -8,7 +8,7 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import LoginField from "./LoginField";
 import loginFields from "./loginFields";
-import * as actions from "../../../store/actions/authActions";
+import * as actions from "../../../store/actions/authActions/loginActions";
 
 class LoginForm extends Component {
   renderFields() {

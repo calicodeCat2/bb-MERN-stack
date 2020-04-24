@@ -36,15 +36,22 @@ module.exports = {
         password: hashedPassword,
       });
       user.save();
-      console.log(user);
-      
-      res.status(200).json({ message: "Registration success!", user: user});
+      const newUser = {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        username: user.username,
+        email: user.email,
+      };
+      console.log(newUser);
+
+      res.status(200).json({ message: "Registration success!", user: newUser });
       // throw new ErrorHandler(501, "Registration failed!");
     });
   },
 
   login: (req, res) => {
-    console.log('login', req.body);
+    console.log("login", req.body);
     const email = req.body.email;
     const password = req.body.password;
     User.findOne({ email: email }).then((result) => {
@@ -52,17 +59,21 @@ module.exports = {
       bcrypt.compare(password, user.password, (err, hash) => {
         if (hash) {
           let { ...authUser } = user;
-          console.log("authUser", authUser);
-
+          authUser = {
+            firstName: authUser._doc.firstName,
+            lastName: authUser._doc.lastName,
+            username: authUser._doc.username,
+            email: authUser._doc.email,
+          }
+          
           jwt.sign(authUser, wombat, (err, token) => {
             if (err) throw new ErrorHandler(401, "Token not created.");
             res.status(200).json({
               message: "Authenticated",
-              id: authUser._doc._id,
-              user: authUser._doc,
-              token
+              user: authUser,
+              token,
             });
-          })
+          });
         } else {
           throw new ErrorHandler(401, "Authentication Failed.");
         }

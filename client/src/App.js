@@ -8,6 +8,7 @@ import Toolbar from "./components/Navigation/Toolbar/Toolbar";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import Register from "./containers/auth/Register";
 import Login from "./containers/auth/Login";
+import Logout from "./containers/auth/Logout";
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/auth/register" exact component={Register} />
         <Route path="/auth/login" exact component={Login} />
+        <Route path="/logoout" exact component={Logout} />
       </Switch>
     );
     return (

@@ -6,14 +6,16 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import thunk from "redux-thunk";
 // import logger from 'redux-logger';
-import { reducer as formReducer } from 'redux-form';
 
 import App from "./App";
-import authReducer from './store/reducers/authReducer';
+import { reducer as formReducer } from 'redux-form';
+import loginReducer from './store/reducers/authReducers/loginReducer'
+import registerReducer from './store/reducers/authReducers/registerReducer';
 
 const rootReducer = combineReducers({
-  auth: authReducer,
-  form: formReducer
+  form: formReducer,
+  login: loginReducer,
+  register: registerReducer
 })
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 

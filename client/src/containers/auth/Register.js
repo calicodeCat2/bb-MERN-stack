@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import "./Register.scss";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import * as actions from '../../store/actions/authActions';
+import * as actions from '../../store/actions/authActions/registerActions';
+
 import RegisterForm from "../../components/Forms/AuthForms/RegisterForm";
 
 class Register extends Component {
@@ -15,19 +16,19 @@ class Register extends Component {
     password: "",
   };
 
-  handleChange = (event) => {
+  handleChange = (e) => {
     this.setState({
-      firstName: event.firstName,
-      lastName: event.lastName,
-      username: event.username,
-      email: event.email,
-      password: event.password,
+      firstName: e.firstName,
+      lastName: e.lastName,
+      username: e.username,
+      email: e.email,
+      password: e.password,
     });
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    let user = {
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const user = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       username: this.state.username,
@@ -56,13 +57,10 @@ class Register extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     onRegister: (user) => dispatch(actions.registerUser(user)),
+
   };
 };
 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./Toolbar.scss";
-import { Container, Row, Col } from "react-bootstrap";
+import  Container from "react-bootstrap/Container";
+import  Row from "react-bootstrap/Row";
+import  Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import NavigationItems from "../NavigationItems/NavigationItems";
 

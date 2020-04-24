@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const cors = require('cors')
 
 const keys = require("./config/keys");
 const { handleError } = require('./middlewares/error')
@@ -10,7 +11,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const app = express();
-app.use(morgan("dev"));
+app.use(morgan("dev"), cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
